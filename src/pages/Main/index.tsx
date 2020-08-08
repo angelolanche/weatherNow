@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ImageBackground, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { AppLoading } from 'expo';
 import { RectButton } from 'react-native-gesture-handler';
 import api from '../../services/weatherApi';
 import {climateDataTypes} from '../../types/interface'
 
-const Main = () => {
+const { width } = Dimensions.get('window');
+const itemWidth = width.valueOf() - 48;
 
+const Main = () => {
     const [climateData, setClimateData] = useState<climateDataTypes>();
     const [initialLocation, setInitialLocation] = useState<number[]>([]);
     
@@ -17,7 +19,7 @@ const Main = () => {
             setInitialLocation([latitude, longitude]);
             getClimateData(latitude, longitude);
         }, () => {
-            alert("O Compartilhamento de Localização é Necessário para o Funcionamento do App");
+            alert({ messege: "O Compartilhamento de Localização é Necessário para o Funcionamento do App"});
         });
     }, []);
 
@@ -88,10 +90,10 @@ const Main = () => {
                             </View>
                         </RectButton>
                         <RectButton style={styles.mainContainer}>
-                            <View>
-                                <Text>Detalhes do Clima</Text>
+                            <View style={styles.detailsTitleBox}>
+                                <Text style={styles.detailsTitle}>Detalhes do Clima</Text>
                             </View>
-                            <View>
+                            <View style={ styles.detailsData}>
                                 <Text style={styles.detailsText}>Máxima {climateData.maxTemperature}°C</Text>
                                 <Text style={styles.detailsText}>Mínima {climateData.minTemperature}°C</Text>
                                 <Text style={styles.detailsText}>Sensação Térmica {climateData.feelsLike}°C</Text>
@@ -121,25 +123,28 @@ const styles = StyleSheet.create({
     
     imageBg: {
         flex: 1,
-        
     },
 
-    page: {
-        flex: 1,
-        padding: 22,
-        paddingHorizontal: 24,
+    page: { 
+        flex: 1, 
+        padding: 22, 
+        paddingHorizontal: 24, 
+        width,
     },
 
     carrousselContainer: {
         flex: 1,
         flexDirection: 'row',
+        width,
+        paddingRight: 24,
     },
 
     mainContainer: {
         flex: 1,
         marginTop: 20,
         marginBottom: 20,
-        minWidth: '100%',
+        marginRight: 24,
+        width: itemWidth,
     },
 
     temperatureContainer: {
@@ -151,6 +156,7 @@ const styles = StyleSheet.create({
         fontSize: 75,
         textAlign: 'center',
         color: '#222',
+        opacity: 0.8,
         fontFamily: 'JosefinSans_300Light',
     },
 
@@ -158,6 +164,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         textAlign: 'center',
         color: '#222',
+        opacity: 0.8,
     },
 
     descriptionContainer: {
@@ -172,8 +179,8 @@ const styles = StyleSheet.create({
     },
 
     rectButton: {
-        backgroundColor: '#222',
-        opacity: 0.7,
+        backgroundColor: 'rgba(20, 20, 20, 0.8)',
+        opacity: 0.8,
         height: 60,
         borderRadius: 10,
         marginTop: 8,
@@ -189,8 +196,29 @@ const styles = StyleSheet.create({
         letterSpacing: 7,
     },
 
-    detailsText: {
+    detailsTitleBox: {
+        padding: 20,
+    },
+    
+    detailsTitle: {
+        fontSize: 30,
+        fontFamily: 'JosefinSans_300Light',
+        color: '#000',
+        textAlign: 'center',
+    },
 
+    detailsData: {
+        flex: 1, 
+        justifyContent: 'space-evenly',
+    },
+
+    detailsText: {
+        fontSize: 18,
+        color: '#222',
+        fontFamily: 'JosefinSans_400Regular',
+        borderBottomColor: '#222',
+        borderBottomWidth: 2,
+        textAlign: 'right',
     },
 });
 

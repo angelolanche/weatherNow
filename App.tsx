@@ -10,9 +10,6 @@ import Main from './src/pages/Main';
 
 export default function App() {
   const [fonts] = useFonts({
-    Roboto_400Regular,
-    Roboto_500Medium,
-    Roboto_700Bold,
     Ubuntu_300Light,
     Ubuntu_400Regular,
     Ubuntu_700Bold,
