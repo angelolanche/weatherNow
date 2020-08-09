@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ImageBackground, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, ScrollView, Dimensions, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import { AppLoading } from 'expo';
 import { RectButton } from 'react-native-gesture-handler';
 import api from '../../services/weatherApi';
 import {climateDataTypes} from '../../types/interface'
 
-const { width } = Dimensions.get('window');
-const itemWidth = width.valueOf() - 48;
 
 const Main = () => {
     const [climateData, setClimateData] = useState<climateDataTypes>();
     const [initialLocation, setInitialLocation] = useState<number[]>([]);
+    const [screenPage, setScreenPage] = useState<number>(0);
     
     useEffect(() => {        
         navigator.geolocation.getCurrentPosition(position => {
@@ -51,12 +50,18 @@ const Main = () => {
         setClimateData(climateData);
     }
 
-    function updateClimateData() {
+    function handleUpdateClimateData() {
         const [latitude, longitude ] = initialLocation;
         getClimateData(latitude, longitude);
     }
-
     
+    function handleScroll(e: NativeSyntheticEvent<NativeScrollEvent>) {
+        const scrollXposition = e.nativeEvent.contentOffset.x;
+         setScreenPage(scrollXposition);
+         console.log(scrollXposition);
+    }
+
+    console.log();
 
     if (!climateData) {
         return (
@@ -66,22 +71,28 @@ const Main = () => {
     };
     
     return (
+
         <ImageBackground
             source={require('../../assets/sunnyDay.jpg')}
             style={styles.container}
             imageStyle={styles.imageBg}
         >
             <View style={styles.page}>
+
+            <View style={styles.pagination}>
+                <View style={screenPage > screenPage/2? styles.inactiveColor : styles.activeColor} />
+                <View style={screenPage > screenPage/2? styles.activeColor : styles.inactiveColor} />
+            </View>
+
                 <View style={styles.carrousselContainer}>
                     <ScrollView 
-                    horizontal={true}
+                    horizontal
                     showsHorizontalScrollIndicator={false}
-                    centerContent={true}
-                    bounces={true}
-                    alwaysBounceHorizontal={true}
+                    pagingEnabled
+                    onScroll={ event => handleScroll(event)}
                     >
-                        <RectButton style={styles.mainContainer}>
-                            <View style={styles.temperatureContainer}>
+                        <RectButton style={styles.mainContainer} activeOpacity={0.6}>
+                            <View style={styles.temperatureContainer} >
                                 <Text style={styles.temperature}>{climateData.temperature}°C</Text>
                                 <Text style={styles.locale}>{climateData.city} - {climateData.country}</Text>
                             </View>
@@ -93,19 +104,19 @@ const Main = () => {
                             <View style={styles.detailsTitleBox}>
                                 <Text style={styles.detailsTitle}>Detalhes do Clima</Text>
                             </View>
-                            <View style={ styles.detailsData}>
-                                <Text style={styles.detailsText}>Máxima {climateData.maxTemperature}°C</Text>
-                                <Text style={styles.detailsText}>Mínima {climateData.minTemperature}°C</Text>
-                                <Text style={styles.detailsText}>Sensação Térmica {climateData.feelsLike}°C</Text>
-                                <Text style={styles.detailsText}>Pressão atmosférica {climateData.pressure}hPa</Text>
-                                <Text style={styles.detailsText}>Humidade relativa do ar {climateData.humidity}%</Text>
-                                <Text style={styles.detailsText}>Visibilidade {climateData.visibility}m</Text>
-                                <Text style={styles.detailsText}>Velocidade do vento {climateData.windSpeed}km/h</Text>
+                            <View style={styles.detailsData}>
+                                <Text style={styles.detailsText}>Máxima - {climateData.maxTemperature}°C</Text>
+                                <Text style={styles.detailsText}>Mínima - {climateData.minTemperature}°C</Text>
+                                <Text style={styles.detailsText}>Sensação Térmica - {climateData.feelsLike}°C</Text>
+                                <Text style={styles.detailsText}>Pressão atmosférica - {climateData.pressure}hPa</Text>
+                                <Text style={styles.detailsText}>Humidade relativa do ar - {climateData.humidity}%</Text>
+                                <Text style={styles.detailsText}>Visibilidade - {climateData.visibility}m</Text>
+                                <Text style={styles.detailsText}>Velocidade do vento - {climateData.windSpeed}km/h</Text>
                             </View>
                         </RectButton>
                     </ScrollView>
                 </View>                    
-                <RectButton onPress={updateClimateData} style={styles.rectButton}>
+                <RectButton onPress={handleUpdateClimateData} style={styles.rectButton}>
                     <Text style={styles.rectButtonText}>Atualizar Clima</Text>
                 </RectButton>
             </View>
@@ -113,6 +124,7 @@ const Main = () => {
     )
 };
 
+const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
 
     container: {
@@ -132,6 +144,28 @@ const styles = StyleSheet.create({
         width,
     },
 
+    pagination: {
+        width: width - 48, 
+        marginTop: 15, 
+        flexDirection: 'row', 
+        overflow: 'hidden', 
+        justifyContent: 'center'
+    },
+
+    activeColor: {
+        width: '50%', 
+        height: 2, 
+        marginHorizontal: 5, 
+        backgroundColor: '#222',
+    },
+
+    inactiveColor: {
+        width: '50%', 
+        height: 2, 
+        marginHorizontal: 5, 
+        backgroundColor: 'rgba(220, 220, 220, 0.5)',
+    },
+
     carrousselContainer: {
         flex: 1,
         flexDirection: 'row',
@@ -144,7 +178,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 20,
         marginRight: 24,
-        width: itemWidth,
+        width: width - 48,
     },
 
     temperatureContainer: {
