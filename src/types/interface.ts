@@ -10,4 +10,5 @@ export interface climateDataTypes {
     description: number,
     city: string,
     country: string,
+    icon: string,
 };

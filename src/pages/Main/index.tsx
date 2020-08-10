@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ImageBackground, StyleSheet, ScrollView, Dimensions, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
-import { AppLoading } from 'expo';
 import { RectButton } from 'react-native-gesture-handler';
 import api from '../../services/weatherApi';
-import {climateDataTypes} from '../../types/interface'
+import {climateDataTypes} from '../../types/interface';
 
 
 const Main = () => {
     const [climateData, setClimateData] = useState<climateDataTypes>();
-    const [initialLocation, setInitialLocation] = useState<number[]>([]);
     const [screenPage, setScreenPage] = useState<number>(0);
+    const [initialLocation, setInitialLocation] = useState<number[]>([]);
+    const [backgroundImg, setBackgroundImg] = useState<string>('');
+    const backgroundImgNames: Object = {
+        '00': require('../../assets/defaultImg.png'),
+        '01': require('../../assets/clearSky.png'),
+        '02': require('../../assets/fewClouds.png'),
+        '03': require('../../assets/scatteredClouds.png'),
+        '04': require('../../assets/brokenClouds.png'),
+        '09': require('../../assets/showerRain.png'),
+        '10': require('../../assets/rain.png'),
+        '11': require('../../assets/thunderStorm.png'),
+        '13': require('../../assets/snow.png'),
+        '50': require('../../assets/mist.png'),
+    };
     
     useEffect(() => {        
         navigator.geolocation.getCurrentPosition(position => {
@@ -17,10 +29,32 @@ const Main = () => {
             
             setInitialLocation([latitude, longitude]);
             getClimateData(latitude, longitude);
+
         }, () => {
             alert({ messege: "O Compartilhamento de Localização é Necessário para o Funcionamento do App"});
+
         });
+
     }, []);
+
+    useEffect(() => {
+            const nolettersIconId = climateData?.icon.replace(/\D+/g, '');
+            const urls = Object.entries(backgroundImgNames).find(item => {
+                
+                nolettersIconId == item[0]
+                ? setBackgroundImg(item[1])
+                : '';
+            });
+
+            // backgroundImgNames.find((obj) => { 
+            //     const backgroundImgId = Object.keys(obj)[0];
+            //     const backgroundImagePath = Object.values(obj)[0];
+            //     console.log(backgroundImagePath);
+            //     nolettersIconId == backgroundImgId
+            //     ? setBackgroundImg(backgroundImagePath)
+            //     : '';
+            // });
+    }, [climateData]);
 
     const getClimateData = async (lat: number, lon: number) => {
         const response = await api.get('', {
@@ -33,7 +67,7 @@ const Main = () => {
             }
         });
         
-        const climateData = {
+        const dataResponse = {
             temperature: response.data.main.temp,
             maxTemperature: response.data.main.temp_max,
             minTemperature: response.data.main.temp_min,
@@ -44,11 +78,12 @@ const Main = () => {
             windSpeed: response.data.wind.speed,
             description: response.data.weather[0].description,
             city: response.data.name,
-            country : response.data.sys.country,
-        };
-        
-        setClimateData(climateData);
-    }
+            country: response.data.sys.country,
+            icon: response.data.weather[0].icon,
+        }
+
+        setClimateData(dataResponse);
+    };
 
     function handleUpdateClimateData() {
         const [latitude, longitude ] = initialLocation;
@@ -58,69 +93,68 @@ const Main = () => {
     function handleScroll(e: NativeSyntheticEvent<NativeScrollEvent>) {
         const scrollXposition = e.nativeEvent.contentOffset.x;
          setScreenPage(scrollXposition);
-         console.log(scrollXposition);
     }
 
-    console.log();
-
-    if (!climateData) {
+    if(!climateData) {
         return (
-            <AppLoading>
-            </AppLoading>
+            <View>
+                <Text>Carregando...</Text>
+            </View>
         )
-    };
-    
+    }
+
     return (
+        <>
+            <ImageBackground
+                source={require(backgroundImg)} 
+                style={styles.container}
+                imageStyle={styles.imageBg}
+            >
+                <View style={styles.page}>
 
-        <ImageBackground
-            source={require('../../assets/sunnyDay.jpg')}
-            style={styles.container}
-            imageStyle={styles.imageBg}
-        >
-            <View style={styles.page}>
+                <View style={styles.pagination}>
+                    <View style={screenPage > screenPage/2? styles.inactiveColor : styles.activeColor} />
+                    <View style={screenPage > screenPage/2? styles.activeColor : styles.inactiveColor} />
+                </View>
 
-            <View style={styles.pagination}>
-                <View style={screenPage > screenPage/2? styles.inactiveColor : styles.activeColor} />
-                <View style={screenPage > screenPage/2? styles.activeColor : styles.inactiveColor} />
-            </View>
-
-                <View style={styles.carrousselContainer}>
-                    <ScrollView 
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    pagingEnabled
-                    onScroll={ event => handleScroll(event)}
-                    >
-                        <RectButton style={styles.mainContainer} activeOpacity={0.6}>
-                            <View style={styles.temperatureContainer} >
-                                <Text style={styles.temperature}>{climateData.temperature}°C</Text>
-                                <Text style={styles.locale}>{climateData.city} - {climateData.country}</Text>
-                            </View>
-                            <View style={styles.descriptionContainer}>
-                                <Text style={styles.descriptionText}>{climateData.description}</Text>
-                            </View>
-                        </RectButton>
-                        <RectButton style={styles.mainContainer}>
-                            <View style={styles.detailsTitleBox}>
-                                <Text style={styles.detailsTitle}>Detalhes do Clima</Text>
-                            </View>
-                            <View style={styles.detailsData}>
-                                <Text style={styles.detailsText}>Máxima - {climateData.maxTemperature}°C</Text>
-                                <Text style={styles.detailsText}>Mínima - {climateData.minTemperature}°C</Text>
-                                <Text style={styles.detailsText}>Sensação Térmica - {climateData.feelsLike}°C</Text>
-                                <Text style={styles.detailsText}>Pressão atmosférica - {climateData.pressure}hPa</Text>
-                                <Text style={styles.detailsText}>Humidade relativa do ar - {climateData.humidity}%</Text>
-                                <Text style={styles.detailsText}>Visibilidade - {climateData.visibility}m</Text>
-                                <Text style={styles.detailsText}>Velocidade do vento - {climateData.windSpeed}km/h</Text>
-                            </View>
-                        </RectButton>
-                    </ScrollView>
-                </View>                    
-                <RectButton onPress={handleUpdateClimateData} style={styles.rectButton}>
-                    <Text style={styles.rectButtonText}>Atualizar Clima</Text>
-                </RectButton>
-            </View>
-        </ImageBackground>
+                    <View style={styles.carrousselContainer}>
+                        <ScrollView 
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        pagingEnabled
+                        onScroll={ event => handleScroll(event)}
+                        >
+                            <RectButton style={styles.mainContainer} activeOpacity={0.6}>
+                                <View style={styles.temperatureContainer} >
+                                    <Text style={styles.temperature}>{climateData.temperature}°C</Text>
+                                    <Text style={styles.locale}>{climateData.city} - {climateData.country}</Text>
+                                </View>
+                                <View style={styles.descriptionContainer}>
+                                    <Text style={styles.descriptionText}>{climateData.description}</Text>
+                                </View>
+                            </RectButton>
+                            <RectButton style={styles.mainContainer}>
+                                <View style={styles.detailsTitleBox}>
+                                    <Text style={styles.detailsTitle}>Detalhes do Clima</Text>
+                                </View>
+                                <View style={styles.detailsData}>
+                                    <Text style={styles.detailsText}>Máxima - {climateData.maxTemperature}°C</Text>
+                                    <Text style={styles.detailsText}>Mínima - {climateData.minTemperature}°C</Text>
+                                    <Text style={styles.detailsText}>Sensação Térmica - {climateData.feelsLike}°C</Text>
+                                    <Text style={styles.detailsText}>Pressão atmosférica - {climateData.pressure}hPa</Text>
+                                    <Text style={styles.detailsText}>Humidade relativa do ar - {climateData.humidity}%</Text>
+                                    <Text style={styles.detailsText}>Visibilidade - {climateData.visibility}m</Text>
+                                    <Text style={styles.detailsText}>Velocidade do vento - {climateData.windSpeed}km/h</Text>
+                                </View>
+                            </RectButton>
+                        </ScrollView>
+                    </View>                    
+                    <RectButton onPress={handleUpdateClimateData} style={styles.rectButton}>
+                        <Text style={styles.rectButtonText}>Atualizar Clima</Text>
+                    </RectButton>
+                </View>
+            </ImageBackground>
+        </>
     )
 };
 
@@ -213,7 +247,7 @@ const styles = StyleSheet.create({
     },
 
     rectButton: {
-        backgroundColor: 'rgba(20, 20, 20, 0.8)',
+        backgroundColor: 'rgba(100, 100, 100, 0.5)',
         opacity: 0.8,
         height: 60,
         borderRadius: 10,
