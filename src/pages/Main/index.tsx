@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ImageBackground, StyleSheet, ScrollView, Dimensions, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, ScrollView, Dimensions, NativeSyntheticEvent, NativeScrollEvent, ImageSourcePropType} from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import api from '../../services/weatherApi';
 import {climateDataTypes} from '../../types/interface';
@@ -9,7 +9,7 @@ const Main = () => {
     const [climateData, setClimateData] = useState<climateDataTypes>();
     const [screenPage, setScreenPage] = useState<number>(0);
     const [initialLocation, setInitialLocation] = useState<number[]>([]);
-    const [backgroundImg, setBackgroundImg] = useState<string>('');
+    const [backgroundImg, setBackgroundImg] = useState<ImageSourcePropType>('' as ImageSourcePropType);
     const backgroundImgNames: Object = {
         '00': require('../../assets/defaultImg.png'),
         '01': require('../../assets/clearSky.png'),
@@ -38,22 +38,14 @@ const Main = () => {
     }, []);
 
     useEffect(() => {
-            const nolettersIconId = climateData?.icon.replace(/\D+/g, '');
-            const urls = Object.entries(backgroundImgNames).find(item => {
-                
-                nolettersIconId == item[0]
-                ? setBackgroundImg(item[1])
+            Object.entries(backgroundImgNames).find(item => {
+                const backgroundImgId = item[0];
+                const backgroundImagePath = item[1];
+
+                climateData?.icon.replace(/\D+/g, '') == backgroundImgId
+                ? setBackgroundImg(backgroundImagePath)
                 : '';
             });
-
-            // backgroundImgNames.find((obj) => { 
-            //     const backgroundImgId = Object.keys(obj)[0];
-            //     const backgroundImagePath = Object.values(obj)[0];
-            //     console.log(backgroundImagePath);
-            //     nolettersIconId == backgroundImgId
-            //     ? setBackgroundImg(backgroundImagePath)
-            //     : '';
-            // });
     }, [climateData]);
 
     const getClimateData = async (lat: number, lon: number) => {
@@ -104,9 +96,9 @@ const Main = () => {
     }
 
     return (
-        <>
+        <>  
             <ImageBackground
-                source={require(backgroundImg)} 
+                source={backgroundImg}
                 style={styles.container}
                 imageStyle={styles.imageBg}
             >
@@ -182,22 +174,23 @@ const styles = StyleSheet.create({
         width: width - 48, 
         marginTop: 15, 
         flexDirection: 'row', 
-        overflow: 'hidden', 
         justifyContent: 'center'
     },
 
     activeColor: {
-        width: '50%', 
-        height: 2, 
+        width: '48%', 
+        height: 3, 
+        borderRadius: 20,
         marginHorizontal: 5, 
-        backgroundColor: '#222',
+        backgroundColor: '#555',
     },
 
     inactiveColor: {
-        width: '50%', 
-        height: 2, 
+        width: '48%', 
+        height: 3, 
+        borderRadius: 20,
         marginHorizontal: 5, 
-        backgroundColor: 'rgba(220, 220, 220, 0.5)',
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
     },
 
     carrousselContainer: {
@@ -213,6 +206,8 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         marginRight: 24,
         width: width - 48,
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+        borderRadius: 15,
     },
 
     temperatureContainer: {
@@ -223,7 +218,7 @@ const styles = StyleSheet.create({
     temperature: {
         fontSize: 75,
         textAlign: 'center',
-        color: '#222',
+        color: '#FFF',
         opacity: 0.8,
         fontFamily: 'JosefinSans_300Light',
     },
@@ -231,7 +226,7 @@ const styles = StyleSheet.create({
     locale: {
         fontSize: 18,
         textAlign: 'center',
-        color: '#222',
+        color: '#FFF',
         opacity: 0.8,
     },
 
@@ -243,14 +238,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 36,
         fontFamily: 'JosefinSans_300Light',
-        color: '#222',
+        color: '#FFF',
     },
 
     rectButton: {
-        backgroundColor: 'rgba(100, 100, 100, 0.5)',
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
         opacity: 0.8,
         height: 60,
-        borderRadius: 10,
+        borderRadius: 15,
         marginTop: 8,
         flexDirection: 'row',
         alignItems: 'center',
@@ -271,20 +266,21 @@ const styles = StyleSheet.create({
     detailsTitle: {
         fontSize: 30,
         fontFamily: 'JosefinSans_300Light',
-        color: '#000',
+        color: '#FFF',
         textAlign: 'center',
     },
 
     detailsData: {
         flex: 1, 
         justifyContent: 'space-evenly',
+        paddingHorizontal: 15,
     },
 
     detailsText: {
         fontSize: 18,
-        color: '#222',
+        color: '#FFF',
         fontFamily: 'JosefinSans_400Regular',
-        borderBottomColor: '#222',
+        borderBottomColor: '#FFF',
         borderBottomWidth: 2,
         textAlign: 'right',
     },
