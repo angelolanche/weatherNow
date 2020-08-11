@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ImageBackground, StyleSheet, ScrollView, Dimensions, NativeSyntheticEvent, NativeScrollEvent, ImageSourcePropType} from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
+import { RectButton, TouchableHighlight } from 'react-native-gesture-handler';
 import api from '../../services/weatherApi';
 import {climateDataTypes} from '../../types/interface';
 
@@ -8,13 +8,13 @@ import {climateDataTypes} from '../../types/interface';
 const Main = () => {
     const [climateData, setClimateData] = useState<climateDataTypes>();
     const [screenPage, setScreenPage] = useState<number>(0);
-    const [initialLocation, setInitialLocation] = useState<number[]>([]);
-    const [backgroundImg, setBackgroundImg] = useState<ImageSourcePropType>('' as ImageSourcePropType);
+    const [initialLocation, setInitialLocation] = useState<number[]>([0, 0]);
+    const [backgroundImg, setBackgroundImg] = useState<ImageSourcePropType>(require('../../assets/defaultImg.png') as ImageSourcePropType);
     const backgroundImgNames: Object = {
         '00': require('../../assets/defaultImg.png'),
         '01': require('../../assets/clearSky.png'),
         '02': require('../../assets/fewClouds.png'),
-        '03': require('../../assets/scatteredClouds.png'),
+        '03': require('../../assets/scatteredClouds.png'), 
         '04': require('../../assets/brokenClouds.png'),
         '09': require('../../assets/showerRain.png'),
         '10': require('../../assets/rain.png'),
@@ -23,18 +23,16 @@ const Main = () => {
         '50': require('../../assets/mist.png'),
     };
     
-    useEffect(() => {        
+    useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
-            const { latitude, longitude } = position.coords;
-            
+            const { latitude, longitude } = position.coords
+
             setInitialLocation([latitude, longitude]);
             getClimateData(latitude, longitude);
-
-        }, () => {
-            alert({ messege: "O Compartilhamento de Localização é Necessário para o Funcionamento do App"});
-
-        });
-
+            }, () => {
+                alert({ messege: "O Compartilhamento de Localização é Necessário para o Funcionamento do App"});
+            } 
+        )
     }, []);
 
     useEffect(() => {
@@ -58,7 +56,7 @@ const Main = () => {
                 appid: '38227b808714349b723fb0775b517295',
             }
         });
-        
+
         const dataResponse = {
             temperature: response.data.main.temp,
             maxTemperature: response.data.main.temp_max,
@@ -73,30 +71,38 @@ const Main = () => {
             country: response.data.sys.country,
             icon: response.data.weather[0].icon,
         }
-
+        
         setClimateData(dataResponse);
     };
 
     function handleUpdateClimateData() {
         const [latitude, longitude ] = initialLocation;
+
         getClimateData(latitude, longitude);
     }
     
     function handleScroll(e: NativeSyntheticEvent<NativeScrollEvent>) {
         const scrollXposition = e.nativeEvent.contentOffset.x;
+
          setScreenPage(scrollXposition);
     }
 
     if(!climateData) {
         return (
-            <View>
-                <Text>Carregando...</Text>
-            </View>
+            <ImageBackground
+                source={require('../../assets/loading.png')}
+                imageStyle={styles.imageBg}
+                style={styles.container}
+                
+            >
+                <View style={styles.loadingContainer}>
+                    <Text style={styles.loadingText}>Carregando...</Text>
+                </View>
+            </ImageBackground>
         )
     }
 
     return (
-        <>  
             <ImageBackground
                 source={backgroundImg}
                 style={styles.container}
@@ -116,7 +122,7 @@ const Main = () => {
                         pagingEnabled
                         onScroll={ event => handleScroll(event)}
                         >
-                            <RectButton style={styles.mainContainer} activeOpacity={0.6}>
+                            <RectButton style={styles.mainContainer}>
                                 <View style={styles.temperatureContainer} >
                                     <Text style={styles.temperature}>{climateData.temperature}°C</Text>
                                     <Text style={styles.locale}>{climateData.city} - {climateData.country}</Text>
@@ -141,12 +147,11 @@ const Main = () => {
                             </RectButton>
                         </ScrollView>
                     </View>                    
-                    <RectButton onPress={handleUpdateClimateData} style={styles.rectButton}>
+                    <TouchableHighlight onPress={handleUpdateClimateData} style={styles.rectButton} underlayColor={'rgba(6, 6, 6, 0.5)'}>
                         <Text style={styles.rectButtonText}>Atualizar Clima</Text>
-                    </RectButton>
+                    </TouchableHighlight>
                 </View>
             </ImageBackground>
-        </>
     )
 };
 
@@ -161,6 +166,19 @@ const styles = StyleSheet.create({
     
     imageBg: {
         flex: 1,
+    },
+
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    
+    loadingText: {
+        fontSize: 35,
+        fontFamily: 'Ubuntu_400Regular',
+        color: '#FFF',
+        letterSpacing: 5,
+        textAlign: 'center',
     },
 
     page: { 
