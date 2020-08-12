@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img alt="WheaterNow" title="#WheateNow" src="./src/assets/banner.png" />
+    <img alt="WheaterNow" title="#WheateNow" src="./assets/banner.png" />
 </h1>
 
 <h4 align="center"> 
@@ -43,17 +43,17 @@ Como um amante da Arte no geral, escolhi as imagens a dedo, todas apresentando u
 ### Mobile Screens
 
 <p align="center">
-  <img alt="loading" title="#loading" src="./assets/loading.png" width="200px">
-  <img alt="fewClouds" title="#fewClouds" src="./assets/fewCloads.png" width="200px">
-  <img alt="clouds" title="#clouds" src="./assets/clouds.png" width="200px">
-  <img alt="brokenClouds" title="#brokenClouds" src="./assets/brokenClouds.png" width="200px">
-  <img alt="rain2" title="#rain2" src="./assets/rain2.png" width="200px">
-  <img alt="rain2" title="#storm" src="./assets/storm.png" width="200px">
-  <img alt="rain" title="#rain" src="./assets/rain.png" width="200px">
-  <img alt="snow" title="#snow" src="./assets/snow.png" width="200px">
-  <img alt="mist" title="#mist" src="./assets/mist.png" width="200px">
-  <img alt="clearSky" title="#clearSky" src="./assets/sky.png" width="200px">
-  <img alt="details" title="#details" src="./assets/deatils.png" width="200px">
+  <img alt="loading" title="#loading" src="./assets/loading.jpeg" width="200px">
+  <img alt="fewClouds" title="#fewClouds" src="./assets/fewCloads.jpeg" width="200px">
+  <img alt="clouds" title="#clouds" src="./assets/clouds.jpeg" width="200px">
+  <img alt="brokenClouds" title="#brokenClouds" src="./assets/brokenClouds.jpeg" width="200px">
+  <img alt="rain2" title="#rain2" src="./assets/rain2.jpeg" width="200px">
+  <img alt="rain2" title="#storm" src="./assets/storm.jpeg" width="200px">
+  <img alt="rain" title="#rain" src="./assets/rain.jpeg" width="200px">
+  <img alt="snow" title="#snow" src="./assets/snow.jpeg" width="200px">
+  <img alt="mist" title="#mist" src="./assets/mist.jpeg" width="200px">
+  <img alt="clearSky" title="#clearSky" src="./assets/sky.jpeg" width="200px">
+  <img alt="details" title="#details" src="./assets/deatils.jpeg" width="200px">
 </p>
 
 ## 🛠 Tecnologias
@@ -96,7 +96,7 @@ $ yarn install
 
 ### :repeat: Rodando a aplicação
 
-```bash
+```
 # Execute a aplicação
 $ yarn start (um escrip que executará o comando expo start)
 
