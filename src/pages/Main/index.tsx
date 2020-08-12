@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ImageBackground, StyleSheet, ScrollView, Dimensions, NativeSyntheticEvent, NativeScrollEvent, ImageSourcePropType} from 'react-native';
-import { RectButton, TouchableHighlight } from 'react-native-gesture-handler';
+import { RectButton, TouchableHighlight, gestureHandlerRootHOC } from 'react-native-gesture-handler';
 import api from '../../services/weatherApi';
 import {climateDataTypes} from '../../types/interface';
+import { ShadowsIntoLightTwo_400Regular } from '@expo-google-fonts/shadows-into-light-two';
 
 
 const Main = () => {
@@ -72,7 +73,7 @@ const Main = () => {
             icon: response.data.weather[0].icon,
         }
         
-        setClimateData(dataResponse);
+        // setClimateData(dataResponse);
     };
 
     function handleUpdateClimateData() {
@@ -96,7 +97,7 @@ const Main = () => {
                 
             >
                 <View style={styles.loadingContainer}>
-                    <Text style={styles.loadingText}>Carregando...</Text>
+                    <Text style={styles.loadingText}>Weather Now</Text>
                 </View>
             </ImageBackground>
         )
@@ -171,14 +172,21 @@ const styles = StyleSheet.create({
     loadingContainer: {
         flex: 1,
         justifyContent: 'center',
+        marginBottom: 50,
     },
     
     loadingText: {
-        fontSize: 35,
-        fontFamily: 'Ubuntu_400Regular',
+        fontSize: 45,
+        fontFamily: 'ShadowsIntoLightTwo_400Regular', 
         color: '#FFF',
         letterSpacing: 5,
         textAlign: 'center',
+        textShadowOffset: {
+            width: 2,
+            height: 2
+        },
+        textShadowColor: 'black',
+        textShadowRadius: 5,
     },
 
     page: { 

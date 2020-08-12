@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import {AppLoading} from 'expo';
 import { Ubuntu_400Regular } from '@expo-google-fonts/ubuntu';
+import { ShadowsIntoLightTwo_400Regular } from '@expo-google-fonts/shadows-into-light-two';
 import { JosefinSans_300Light, JosefinSans_400Regular, useFonts } from '@expo-google-fonts/josefin-sans';
 
 import Main from './src/pages/Main';
@@ -9,6 +10,7 @@ import Main from './src/pages/Main';
 export default function App() {
   const [fontsLoaded] = useFonts({
     Ubuntu_400Regular,
+    ShadowsIntoLightTwo_400Regular,
     JosefinSans_300Light,
     JosefinSans_400Regular,
   });
