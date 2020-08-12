@@ -24,15 +24,15 @@
 Weather Now - para quem gosta de acompanhar a temperatura que está fazendo no local onde se está, ou por pura curiosidade quer obter dados detalhados do clima.
 
 Os usuários terão acesso ao aplicativo móvel, onde poderão:
-- verificar a temperatura que está fazendo Agora na Exata localização em que está sendo feita a consulta.
-- Obter dados detalhados sobre o clima como a temperatura máxima, mínima, humidade relatiav do ar, velocidade do vento, visibilidade, e mais.
+- verificar a temperatura que está fazendo Agora em sua Exata localização.
+- Obter dados detalhados sobre o clima como: temperatura máxima, mínima, humidade relativa do ar, velocidade do vento, visibilidad, e mais.
 
-Projeto inicialmente desenvolvido para pletear o cargo de desenvolvedor junior em React Native, mas que já ganhou o meu coração e um espaço no meu portifolio.
+Projeto inicialmente desenvolvido para pleitear o cargo de desenvolvedor junior em React Native, mas que já ganhou o meu coração e um espaço no meu portifolio.
 
 ## 🎨 Layout
 
 O layout da aplicação foi pensado a relacionar as condições climátias com a aparência do app, alterando a imagem de background de acordo com a descrição climática do momento.
-Como um amante da Arte no geral, escolhi as imagens a dedo, todas apresentando uma testura de pincel e tinta sobre tela.
+Como um amante da Arte no geral, escolhi as imagens a dedo, todas apresentando uma testura de pincel e tinta sobre tela, ou a fins.
 
 ### Mobile Screens
 
