@@ -73,7 +73,7 @@ const Main = () => {
             icon: response.data.weather[0].icon,
         }
         
-        // setClimateData(dataResponse);
+        setClimateData(dataResponse);
     };
 
     function handleUpdateClimateData() {
