@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img alt="WeaterNow" title="#WeaterNow" src="./src/assets/banner.png" />
+    <img alt="weatherNow" title="#weatherNow" src="./assets/banner.png" />
 </h1>
 
 <h4 align="center"> 
@@ -7,11 +7,11 @@
 </h4>
 
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/AngeloLanch/weaterNow?color=%2304D361">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/AngeloLanch/weatherNow?color=%2304D361">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/AngeloLanch/weaterNow">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/angeloLanch/weatherNow">
   
-  <a href="https://github.com/AngeloLanch/WeaterNow/commits/master">
+  <a href="https://github.com/AngeloLanch/weatherNow/commits/master">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/AngeloLanch/weatherNow">
   </a>
 
@@ -21,7 +21,7 @@
 
 ## 💻 Sobre o projeto
 
-Weater Now - para quem gosta de acompanhar a temperatura que está fazendo no local onde se está, ou por pura curiosidade quer obter dados detalhados do clima.
+Weather Now - para quem gosta de acompanhar a temperatura que está fazendo no local onde se está, ou por pura curiosidade quer obter dados detalhados do clima.
 
 Os usuários terão acesso ao aplicativo móvel, onde poderão:
 - verificar a temperatura que está fazendo Agora na Exata localização em que está sendo feita a consulta.
@@ -80,8 +80,8 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode][vsco
 
 ```bash
 # Clone este repositório
-$ git clone https://github.com/AngeloLanch/weaterNow
-
+$ git clone https://github.com/AngeloLanch/weatherNow
+            
 # Acesse a pasta do projeto no terminal/cmd
 $ cd weatherNow
 
