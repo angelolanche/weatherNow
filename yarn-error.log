@@ -1,5 +1,5 @@
 Arguments: 
-  /home/angelo/.nvm/versions/node/v12.16.3/bin/node /usr/share/yarn/bin/yarn.js add @expo-google-fonts/josefinsSans
+  /home/angelo/.nvm/versions/node/v12.16.3/bin/node /usr/share/yarn/bin/yarn.js add @expo-google-fonts/shadowsIntoLightTwo
 
 PATH: 
   /usr/share/yarn/bin:/home/angelo/.local/bin:/home/angelo/.nvm/versions/node/v12.16.3/bin:/usr/share/yarn/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/angelo/Documentos/Android/Sdk/emulator:/home/angelo/Documentos/Android/Sdk/tools:/home/angelo/Documentos/Android/Sdk/tools/bin:/home/angelo/Documentos/Android/Sdk/platform-tools:/home/angelo/android-studio/bin:/home/angelo/Documentos/Android/Sdk/emulator:/home/angelo/Documentos/Android/Sdk/tools:/home/angelo/Documentos/Android/Sdk/tools/bin:/home/angelo/Documentos/Android/Sdk/platform-tools:/home/angelo/android-studio/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@expo-google-fonts%2fjosefinsSans: Not found
+  Error: https://registry.yarnpkg.com/@expo-google-fonts%2fshadowsIntoLightTwo: Not found
       at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66987:18)
       at Request.self.callback (/usr/share/yarn/lib/cli.js:140748:22)
       at Request.emit (events.js:310:20)
@@ -37,6 +37,7 @@ npm manifest:
       "eject": "expo eject"
     },
     "dependencies": {
+      "@expo-google-fonts/josefin-sans": "^0.1.0",
       "@expo-google-fonts/roboto": "^0.1.0",
       "@expo-google-fonts/ubuntu": "^0.1.0",
       "axios": "^0.19.2",
@@ -1054,6 +1055,11 @@ Lockfile:
     integrity sha512-XQsZgjm2EcVUiZQf11UBJQfmZeEmOW8DpI1gsFeln6w0ae0ii4dMQEQ0kjl6DspdWX1aGY1/loyXnP0JS06e/A==
     dependencies:
       "@types/hammerjs" "^2.0.36"
+  
+  "@expo-google-fonts/josefin-sans@^0.1.0":
+    version "0.1.0"
+    resolved "https://registry.yarnpkg.com/@expo-google-fonts/josefin-sans/-/josefin-sans-0.1.0.tgz#5297bc247223eff1b623f3c8ba208158544d9016"
+    integrity sha512-h5hdXLA5MDZS62UTihkwAY1mzLq4UX38fxw6HKiMSMaieyN0qwptfT4JDR4pnGq3agUSwpGRB7kTbsFeXQEiAg==
   
   "@expo-google-fonts/roboto@^0.1.0":
     version "0.1.0"

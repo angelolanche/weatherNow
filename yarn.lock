@@ -1001,6 +1001,11 @@
   resolved "https://registry.yarnpkg.com/@expo-google-fonts/roboto/-/roboto-0.1.0.tgz#2897dc09db4ceb9f5ba337103090e1d70236e811"
   integrity sha512-q+68xWZpLIS/iPC5jwoakEskyTVgIC1jfpNzWFMnUnBoZsWRq1rlpnleR3MjKDeN1Vt0NcvUI/aaZoCyIXhisw==
 
+"@expo-google-fonts/shadows-into-light-two@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/shadows-into-light-two/-/shadows-into-light-two-0.1.0.tgz#ee189c0cce3ff3245e1bff9d98e5342081b85a48"
+  integrity sha512-Hzhby4z0XNdLAYLEqeADE3xbwiwGCffhbOtJfLdoNaQzCVgG/AvU0tSDjjmFfs+tIZzJuLpiom9zN9YEKySIwg==
+
 "@expo-google-fonts/ubuntu@^0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@expo-google-fonts/ubuntu/-/ubuntu-0.1.0.tgz#c1002c7cdcca246146518504275f8b8bb8ff3acd"
