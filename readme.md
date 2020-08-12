@@ -1,9 +1,5 @@
 <h1 align="center">
-<<<<<<< HEAD
     <img alt="WeaterNow" title="#WeaterNow" src="./src/assets/banner.png" />
-=======
-    <img alt="WheaterNow" title="#WheateNow" src="./assets/banner.png" />
->>>>>>> 98d5a9f954da4846e36a7844ec1f227a01906972
 </h1>
 
 <h4 align="center"> 
@@ -42,7 +38,7 @@ Como um amante da Arte no geral, escolhi as imagens a dedo, todas apresentando u
 
 <p align="center">
   <img alt="loading" title="#loading" src="./assets/loading.jpeg" width="200px">
-  <img alt="fewClouds" title="#fewClouds" src="./assets/fewCloads.jpeg" width="200px">
+  <img alt="fewClouds" title="#fewClouds" src="./assets/fewClouds.jpeg" width="200px">
   <img alt="clouds" title="#clouds" src="./assets/clouds.jpeg" width="200px">
   <img alt="brokenClouds" title="#brokenClouds" src="./assets/brokenClouds.jpeg" width="200px">
   <img alt="rain2" title="#rain2" src="./assets/rain2.jpeg" width="200px">
@@ -51,7 +47,7 @@ Como um amante da Arte no geral, escolhi as imagens a dedo, todas apresentando u
   <img alt="snow" title="#snow" src="./assets/snow.jpeg" width="200px">
   <img alt="mist" title="#mist" src="./assets/mist.jpeg" width="200px">
   <img alt="clearSky" title="#clearSky" src="./assets/sky.jpeg" width="200px">
-  <img alt="details" title="#details" src="./assets/deatils.jpeg" width="200px">
+  <img alt="details" title="#details" src="./assets/details.jpeg" width="200px">
 </p>
 
 ## 🛠 Tecnologias
