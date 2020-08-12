@@ -88,11 +88,14 @@ $ cd weatherNow
 # Instale as dependências
 $ yarn install
 
-### :repeat: Rodando a aplicação
-
 ```
+
+### :repeat: Rodando a aplicação
+```bash
 # Execute a aplicação
 $ yarn start (um escrip que executará o comando expo start)
+
+```
 
 ## :raising_hand: Para contribuir com o projeto
 
@@ -104,8 +107,8 @@ $ yarn start (um escrip que executará o comando expo start)
 
 ## 📝 Licença
 
-Feito por: Ângelo Lanche
-Este projeto esta sobe a licença MIT.
+Feito por: Ângelo Lanche.
+Este projeto está sobe a licença MIT.
 
 Este projeto foi um novo desafio ao qual me propus e também marca uma nova etapa para mim como desenolvedor júnior 
 [Entre em contato!](https://www.linkedin.com/in/AngeloLanch/)
@@ -118,5 +121,3 @@ Este projeto foi um novo desafio ao qual me propus e também marca uma nova etap
 [vscode]: https://code.visualstudio.com/
 [vceditconfig]: https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
 [license]: https://opensource.org/licenses/MIT
-
-O format deste Readme foi inspirado em: https://github.com/tgmarinho/Ecoleta/blob/master/README.md
