@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ImageBackground, ScrollView, NativeSyntheticEvent, NativeScrollEvent, ImageSourcePropType} from 'react-native';
 import { RectButton, TouchableHighlight } from 'react-native-gesture-handler';
 import api from '../../services/weatherApi';
-import {climateDataTypes} from '../../types/interface';
+import { climateDataTypes } from '../../types/interface';
 import styles from './style';
 
 const Main = () => {
+
     const [climateData, setClimateData] = useState<climateDataTypes>();
     const [screenPage, setScreenPage] = useState<number>(0);
     const [initialLocation, setInitialLocation] = useState<number[]>([0, 0]);
@@ -40,7 +41,7 @@ const Main = () => {
                 const backgroundImgId = item[0];
                 const backgroundImagePath = item[1];
 
-                climateData?.icon.replace(/\D+/g, '') == backgroundImgId
+                climateData?.icon.toString().replace(/\D+/g, '') == backgroundImgId
                 ? setBackgroundImg(backgroundImagePath)
                 : '';
             });
