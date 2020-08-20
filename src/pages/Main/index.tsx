@@ -41,7 +41,7 @@ const Main = () => {
                 const backgroundImgId = item[0];
                 const backgroundImagePath = item[1];
 
-                climateData?.icon.toString().replace(/\D+/g, '') == backgroundImgId
+                String(climateData?.icon).replace(/\D+/g, '') == backgroundImgId
                 ? setBackgroundImg(backgroundImagePath)
                 : '';
             });
