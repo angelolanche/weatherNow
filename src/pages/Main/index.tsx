@@ -132,7 +132,7 @@ const Main = () => {
                                     <Text style={styles.descriptionText}>{climateData.description}</Text>
                                 </View>
                             </RectButton>
-                            <RectButton style={styles.mainContainer}>
+                            <RectButton style={styles.mainContainer} >
                                 <View style={styles.detailsTitleBox}>
                                     <Text style={styles.detailsTitle}>Detalhes do Clima</Text>
                                 </View>
